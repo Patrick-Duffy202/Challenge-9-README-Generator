@@ -1,0 +1,25 @@
+{
+  "name": "challenge-9-readme-generator",
+  "version": "1.0.0",
+  "description": "Readme generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Patrick-Duffy202/Challenge-9-README-Generator.git"
+  },
+  "keywords": [
+    "Repo"
+  ],
+  "author": "Patrick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Patrick-Duffy202/Challenge-9-README-Generator/issues"
+  },
+  "homepage": "https://github.com/Patrick-Duffy202/Challenge-9-README-Generator#readme",
+  "dependencies": {
+    "inquirer": "^9.1.3"
+  }
+}
