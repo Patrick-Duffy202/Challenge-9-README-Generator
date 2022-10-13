@@ -1,14 +1,17 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const util = require("util");
+const generateMarkdown = require('./utils/generateMarkdown.js');
+const writeFileAsync = util.promisify(fs.writeFile);
 // TODO: Create an array of questions for user input
 const promptUser = () => {
     return inquirer.prompt([
     {
         type: 'input',
         message: "What is your GitHub username?",
-        name: 'username',
-        default: 'patrick-duffy202',
+        name: 'questions',
+        default: '@Patrick-duffy202',
         validate: function (answer) {
             if (answer.length < 1) {
                 return console.log("A valid GitHub username is required.");
@@ -18,12 +21,12 @@ const promptUser = () => {
     },
     {
         type: 'input',
-        message: "What is the name of your GitHub repo?",
-        name: 'repo',
-        default: 'readme-generator',
+        message: "What is your email address?",
+        name: 'question',
+        default: 'Patrickduffy494@yahoo.com',
         validate: function (answer) {
             if (answer.length < 1) {
-                return console.log("A valid GitHub repo is required for a badge.");
+                return console.log("A valid email is required.");
             }
             return true;
         }
@@ -80,22 +83,20 @@ const promptUser = () => {
     }
 ]);
 }
-promptUser()
 
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
-        if (err) {
-          return console.log(err);
-        }
-      
-        console.log("Success! Your README.md file has been generated")
-    });
-}
+async function init() {
+    try {
+        const answers = await promptUser();
+        const generateContent = generateMarkdown(answers);
+        await writeFileAsync('./readme/README.md', generateContent);
+        console.log('Successfully wrote README.md');
+    }   catch(err) {
+        console.log(err);
+    }
+  }
 
-// TODO: Create a function to initialize app
-function init() {}
 
 // Function call to initialize app
 init();
